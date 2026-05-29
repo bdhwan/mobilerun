@@ -22,6 +22,7 @@ SUPPORTED_PROVIDERS = [
     "Anthropic_LLM",
     "AnthropicOAuthLLM",
     "Ollama",
+    "Ollama_llm",
 ]
 
 
@@ -109,7 +110,7 @@ def get_usage_from_response(provider: str, chat_rsp: ChatResponse) -> UsageResul
             total_tokens=input_tokens + output_tokens,
             requests=1,
         )
-    elif provider == "Ollama":
+    elif provider in {"Ollama", "Ollama_llm"}:
         # Ollama response format uses different field names
         prompt_eval_count = rsp.get("prompt_eval_count", 0)
         eval_count = rsp.get("eval_count", 0)
